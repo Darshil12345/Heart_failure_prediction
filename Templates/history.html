@@ -1,0 +1,237 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="card shadow">
+
+    <div class="card-header bg-dark text-white">
+
+        <h3>
+
+            Prediction History
+
+        </h3>
+
+    </div>
+
+    <div class="card-body">
+
+        <form method="GET" class="mb-4">
+
+            <div class="input-group">
+
+                <input
+                    type="text"
+                    name="q"
+                    class="form-control"
+                    placeholder="Search by Name or Email"
+                    value="{{ query }}"
+                >
+
+                <button
+                    type="submit"
+                    class="btn btn-primary"
+                >
+
+                    Search
+
+                </button>
+
+            </div>
+
+        </form>
+
+        <table class="table table-striped table-hover">
+
+            <thead>
+
+                <tr>
+
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Age</th>
+                    <th>Sex</th>
+                    <th>BP</th>
+                    <th>Cholesterol</th>
+                    <th>Result</th>
+                    <th>Date</th>
+                    <th>Action</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                {% for prediction in page_obj %}
+
+                <tr>
+
+                    <td>
+
+                        {{ prediction.id }}
+
+                    </td>
+
+                    <td>
+
+                        {{ prediction.name }}
+
+                    </td>
+
+                    <td>
+
+                        {{ prediction.email }}
+
+                    </td>
+
+                    <td>
+
+                        {{ prediction.age }}
+
+                    </td>
+
+                    <td>
+
+                        {{ prediction.sex }}
+
+                    </td>
+
+                    <td>
+
+                        {{ prediction.resting_bp }}
+
+                    </td>
+
+                    <td>
+
+                        {{ prediction.cholesterol }}
+
+                    </td>
+
+                    <td>
+
+                        {% if prediction.result == "Heart Disease" %}
+
+                            <span class="badge bg-danger">
+
+                                {{ prediction.result }}
+
+                            </span>
+
+                        {% else %}
+
+                            <span class="badge bg-success">
+
+                                {{ prediction.result }}
+
+                            </span>
+
+                        {% endif %}
+
+                    </td>
+
+                    <td>
+
+                        {{ prediction.created_at|date:"d M Y H:i" }}
+
+                    </td>
+
+                    <td>
+
+                        <a
+                            href="/delete/{{ prediction.id }}/"
+                            class="btn btn-danger btn-sm"
+                        >
+
+                            Delete
+
+                        </a>
+
+                    </td>
+
+                </tr>
+
+                {% empty %}
+
+                <tr>
+
+                    <td
+                        colspan="10"
+                        class="text-center"
+                    >
+
+                        No predictions found
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+        <nav>
+
+            <ul class="pagination justify-content-center">
+
+                {% if page_obj.has_previous %}
+
+                <li class="page-item">
+
+                    <a
+                        class="page-link"
+                        href="?page={{ page_obj.previous_page_number }}{% if query %}&q={{ query }}{% endif %}"
+                    >
+
+                        Previous
+
+                    </a>
+
+                </li>
+
+                {% endif %}
+
+                <li class="page-item active">
+
+                    <span class="page-link">
+
+                        Page {{ page_obj.number }}
+
+                        of
+
+                        {{ page_obj.paginator.num_pages }}
+
+                    </span>
+
+                </li>
+
+                {% if page_obj.has_next %}
+
+                <li class="page-item">
+
+                    <a
+                        class="page-link"
+                        href="?page={{ page_obj.next_page_number }}{% if query %}&q={{ query }}{% endif %}"
+                    >
+
+                        Next
+
+                    </a>
+
+                </li>
+
+                {% endif %}
+
+            </ul>
+
+        </nav>
+
+    </div>
+
+</div>
+
+{% endblock %}

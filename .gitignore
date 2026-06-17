@@ -1,0 +1,107 @@
+# =========================
+# Python
+# =========================
+
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# =========================
+# Virtual Environments
+# =========================
+
+venv/
+env/
+ENV/
+.venv/
+
+# =========================
+# Django
+# =========================
+
+db.sqlite3
+db.sqlite3-journal
+
+media/
+
+# Generated static files
+staticfiles/
+
+# =========================
+# Environment Variables
+# =========================
+
+.env
+.env.*
+
+# =========================
+# IDE / Editor
+# =========================
+
+.vscode/
+.idea/
+
+# PyCharm
+*.iml
+
+# =========================
+# Jupyter
+# =========================
+
+.ipynb_checkpoints/
+
+# =========================
+# Logs
+# =========================
+
+*.log
+
+# =========================
+# Testing / Coverage
+# =========================
+
+.coverage
+htmlcov/
+.pytest_cache/
+
+# =========================
+# Build / Distribution
+# =========================
+
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# =========================
+# OS Files
+# =========================
+
+.DS_Store
+Thumbs.db
+
+# =========================
+# Machine Learning
+# =========================
+
+# Keep trained models
+# !ml/models/heart_model.pkl
+# !ml/models/encoders.pkl
+
+# Ignore large datasets
+data/
+datasets/
+*.csv
+*.xlsx
+
+# Uncomment if datasets are required:
+# !data/heart.csv
+
+# =========================
+# Temporary Files
+# =========================
+
+*.tmp
+*.bak
+*.swp

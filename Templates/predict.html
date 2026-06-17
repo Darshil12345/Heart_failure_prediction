@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="card shadow">
+
+    <div class="card-header bg-primary text-white">
+
+        <h3>
+
+            Heart Disease Prediction Form
+
+        </h3>
+
+    </div>
+
+    <div class="card-body">
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+            {{ form.as_p }}
+
+            <button
+                type="submit"
+                class="btn btn-primary"
+            >
+
+                Predict
+
+            </button>
+
+        </form>
+
+        {% if result %}
+
+            <hr>
+
+            <div class="alert {% if result == 'Heart Disease' %}alert-danger{% else %}alert-success{% endif %}">
+
+                <h4>
+
+                    Prediction Result
+
+                </h4>
+
+                <h5>
+
+                    {{ result }}
+
+                </h5>
+
+                <p>
+
+                    Confidence Score:
+
+                    <strong>
+
+                        {{ confidence }}%
+
+                    </strong>
+
+                </p>
+
+                {% if result == "Heart Disease" %}
+
+                    <p>
+
+                        The model indicates a higher likelihood of heart disease.
+                        Please consult a healthcare professional for proper diagnosis.
+
+                    </p>
+
+                {% else %}
+
+                    <p>
+
+                        The model indicates a lower likelihood of heart disease.
+                        Maintain a healthy lifestyle and regular checkups.
+
+                    </p>
+
+                {% endif %}
+
+            </div>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+{% endblock %}
